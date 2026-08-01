@@ -2,7 +2,7 @@ class Solution {
 public:
 bool f(int i,int target,vector<int>&a,vector<vector<int>>&dp){
     if(target==0)return true;
-    if(i==0)return target==a[0];
+    if(i==0)return dp[i][target] = (a[0] == target);
     if(dp[i][target]!=-1)return dp[i][target];
     bool take=false;
     if(a[i]<=target)take=f(i-1,target-a[i],a,dp); 
