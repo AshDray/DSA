@@ -5,7 +5,7 @@ public:
         int mini=INT_MAX;
         for(int p : ps){
             if(p<mini)mini=p;
-            maxi=max(maxi,p-mini);
+            else maxi=max(maxi,p-mini);
         }
         
         return maxi;
