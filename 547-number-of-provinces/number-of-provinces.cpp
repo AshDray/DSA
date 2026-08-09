@@ -13,7 +13,7 @@ void dfs(int node,vector<int> al[],vector<int> &vis){
             for (int j = 0; j < v; j++) {
                 if (c[i][j] == 1 && i != j) {
                     al[i].push_back(j);
-                    al[j].push_back(i);
+                
                 }
             }
         }
