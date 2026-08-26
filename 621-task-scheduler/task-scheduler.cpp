@@ -1,30 +1,28 @@
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-
 class Solution {
 public:
-    int leastInterval(std::vector<char>& tasks, int n) {
-        // Count frequencies of each task
-        std::vector<int> freq(26, 0);
-        int maxFreq = 0;
-        for (char task : tasks) {
-            freq[task - 'A']++;
-            maxFreq = std::max(maxFreq, freq[task - 'A']);
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int>mp(26,0);
+        for(auto it:tasks)mp[it-'A']++;
+        priority_queue<int>pq;
+        int time=0;
+        for(auto it:mp){
+            if(it)pq.push(it);
         }
-
-        // Count how many tasks share the maximum frequency
-        int maxFreqCount = 0;
-        for (int count : freq) {
-            if (count == maxFreq) {
-                maxFreqCount++;
+        while(!pq.empty()){
+            vector<int>temp;
+            for(int i=0;i<n+1;i++){
+                if(!pq.empty()){
+                int t=pq.top();
+                pq.pop();
+                t--;
+                
+                temp.push_back(t);}
             }
+            for(auto it:temp){if(it)pq.push(it);}
+            if(pq.empty())time+=temp.size();
+            else time+=n+1;
+
         }
-
-        // Calculate minimum intervals based on frame structure
-        int time = (maxFreq - 1) * (n + 1) + maxFreqCount;
-
-        // If task count is larger, no idle slots are required
-        return std::max((int)tasks.size(), time);
+        return time;
     }
 };
